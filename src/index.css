@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  html {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+  }
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  div {
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
