@@ -1,8 +1,15 @@
-interface CommonI {
+export interface CommonI {
   id: number;
   name: string;
 }
-
+export interface DistrictI {
+  provinceID: number;
+  data: CommonI[];
+}
+export interface PalikaI {
+  districtID: number;
+  data: CommonI[];
+}
 export const GENDER_DATA: CommonI[] = [
   {
     id: 1,
@@ -17,6 +24,34 @@ export const GENDER_DATA: CommonI[] = [
     name: "Others",
   },
 ];
+
+export const BLOOD_GROUP_DATA: CommonI[] = [
+  {
+    id: 1,
+    name: "A Positive",
+  },
+  {
+    id: 2,
+    name: "B Positive",
+  },
+  {
+    id: 3,
+    name: "AB Positive",
+  },
+  {
+    id: 4,
+    name: "AB Negative",
+  },
+  {
+    id: 5,
+    name: "O Positive",
+  },
+  {
+    id: 6,
+    name: "O Negative",
+  },
+];
+
 export const MARITAL_STATUS_DATA: CommonI[] = [
   {
     id: 1,
@@ -113,7 +148,7 @@ export const PROVINCE_DATA: CommonI[] = [
   },
 ];
 
-export const DISTRICT_DATA = [
+export const DISTRICT_DATA: DistrictI[] = [
   {
     provinceID: 1,
     data: [
@@ -172,7 +207,7 @@ export const DISTRICT_DATA = [
   },
 ];
 
-export const PALIKA_DATA = [
+export const PALIKA_DATA: PalikaI[] = [
   {
     districtID: 1,
     data: [
@@ -342,3 +377,4 @@ export const PALIKA_DATA = [
     ],
   },
 ];
+
