@@ -53,8 +53,8 @@ const Register = () => {
             {tabValue === 1 && (
               <PersonalInformation setTabValue={setTabValue} />
             )}
-            {/* {tabValue === 2 && <Contact setTabValue={setTabValue} />}
-            {tabValue === 3 && <Address setTabValue={setTabValue} />}
+            {tabValue === 2 && <Contact setTabValue={setTabValue} />}
+            {/* {tabValue === 3 && <Address setTabValue={setTabValue} />}
             {tabValue === 4 && <Relationship setTabValue={setTabValue} />} */}
           </form>
         </FormProvider>
