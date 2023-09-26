@@ -1,12 +1,11 @@
+import { useFormContext } from "react-hook-form";
+import { InputTextField } from "../../../../../components/InputFieldText";
 import CommonButton from "../../../../../components/button/commonButton";
 import {
+  BLOOD_GROUP_DATA,
   GENDER_DATA,
   MARITAL_STATUS_DATA,
-  BLOOD_GROUP_DATA,
 } from "../../../../../constants";
-import { InputTextField } from "../../../../../components/InputFieldText";
-import { useFormContext } from "react-hook-form";
-import React from "react";
 import { RegisterSchemaInput } from "../../../schema";
 interface PersonalInformationProps {
   setTabValue: (value: number) => void;
@@ -15,18 +14,11 @@ interface PersonalInformationProps {
 const PersonalInformation = ({ setTabValue }: PersonalInformationProps) => {
   const {
     register,
-    handleSubmit,
-    getValues,
-    formState: { errors, isValidating, isDirty },
+    formState: { errors},
   } = useFormContext<RegisterSchemaInput>();
 
   const nextHandler = () => {
     setTabValue(2);
-  };
-
-  const submitHandler = () => {
-    console.log(getValues("firstName"));
-    console.log("hahah");
   };
 
   return (
@@ -37,6 +29,7 @@ const PersonalInformation = ({ setTabValue }: PersonalInformationProps) => {
         type="text"
         placeholder="Enter Your First Name ..."
         required
+        errorMessage={errors?.firstName?.message}
         {...register("firstName")}
       />
       <InputTextField
@@ -50,18 +43,21 @@ const PersonalInformation = ({ setTabValue }: PersonalInformationProps) => {
         type="text"
         placeholder="Enter Your Last Name ..."
         required
+        errorMessage={errors?.lastName?.message}
         {...register("lastName")}
       />
       <InputTextField
         label="Gender"
         placeholder="select"
         {...register("genderId")}
+        errorMessage={errors?.genderId?.message}
         required
         asChild
       >
         <select>
+          <option value="">--select gender--</option>
           {GENDER_DATA.map((item) => (
-            <option value={item.id}>{item.name}</option>
+            <option key={item.id} value={item.id}>{item.name}</option>
           ))}
         </select>
       </InputTextField>
@@ -70,11 +66,13 @@ const PersonalInformation = ({ setTabValue }: PersonalInformationProps) => {
         placeholder="select"
         {...register("mStatusId")}
         required
+        errorMessage={errors?.mStatusId?.message}
         asChild
       >
-        <select>
+        <select> 
+          <option value="">--select marital status--</option>
           {MARITAL_STATUS_DATA.map((item) => (
-            <option value={item.id}>{item.name}</option>
+            <option key={item.id} value={item.id}>{item.name}</option>
           ))}
         </select>
       </InputTextField>
@@ -84,10 +82,12 @@ const PersonalInformation = ({ setTabValue }: PersonalInformationProps) => {
         {...register("bloodGrpId")}
         required
         asChild
+        errorMessage={errors?.bloodGrpId?.message}
       >
         <select>
+          <option value="">--select blood group--</option>
           {BLOOD_GROUP_DATA.map((item) => (
-            <option value={item.id}>{item.name}</option>
+            <option key={item.id} value={item.id}>{item.name}</option>
           ))}
         </select>
       </InputTextField>
@@ -97,6 +97,7 @@ const PersonalInformation = ({ setTabValue }: PersonalInformationProps) => {
         placeholder="Enter Your Last Name ..."
         required
         {...register("dateOfBirth")}
+        errorMessage={errors?.dateOfBirth?.message}
       />
       <InputTextField
         label="National Id"
@@ -104,15 +105,9 @@ const PersonalInformation = ({ setTabValue }: PersonalInformationProps) => {
         placeholder="Enter Your Last Name ..."
         required
         {...register("nationalId")}
+        errorMessage={errors?.nationalId?.message}
       />
       <CommonButton name="Next" handler={nextHandler} />
-      {/* <CommonButton
-        name="Back"
-        handler={nextHandler}
-        backgroundColor="bg-tertiary"
-        textColor="text-secondary"
-        borderColor="border-secondary"
-      /> */}
     </div>
   );
 };
