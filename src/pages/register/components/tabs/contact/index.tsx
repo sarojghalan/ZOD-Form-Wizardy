@@ -1,12 +1,19 @@
-import React from "react";
-import { RELATION_DATA } from "../../../../../constants";
+import { InputTextField } from "../../../../../components/InputFieldText";
 import CommonButton from "../../../../../components/button/commonButton";
-import { InputFieldText } from "../../../../../components/InputFieldText";
+import { RELATION_DATA } from "../../../../../constants";
+import { useFormContext } from "react-hook-form";
+import { RegisterSchemaInput } from "../../../schema";
+
 interface ContactProps {
   setTabValue: (value: number) => void;
 }
 
 const Contact = ({ setTabValue }: ContactProps) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<RegisterSchemaInput>();
+
   const nextHandler = () => {
     setTabValue(3);
   };
@@ -16,40 +23,55 @@ const Contact = ({ setTabValue }: ContactProps) => {
   return (
     <div>
       <h2>Contact Information</h2>
-      <InputFieldText
-        labelText="Mobile Number"
-        inputType="number"
-        placeHolderText="Enter Your Mobile Number ..."
+      <InputTextField
+        label="Mobile Number"
+        type="number"
+        placeholder="Enter Your Mobile Number ..."
         required
+        {...register("mobileNo")}
+        errorMessage={errors?.mobileNo?.message}
       />
-      <InputFieldText
-        labelText="Email"
-        inputType="email"
-        placeHolderText="Enter Your Email ..."
+      <InputTextField
+        label="Email"
+        type="email"
+        placeholder="Enter Your Email ..."
         required
+        {...register("mobileNo")}
+        errorMessage={errors?.mobileNo?.message}
       />
-      <InputFieldText
-        labelText="Alternate Email"
-        inputType="email"
-        placeHolderText="Enter Your ALternate Email ..."
+      <InputTextField
+        label="Alternate Email"
+        type="email"
+        placeholder="Enter Your ALternate Email ..."
+        {...register("altEmail")}
       />
-      <InputFieldText
-        labelText="Alternate Contact Person"
-        inputType="text"
-        placeHolderText="Enter Your ALternate Contact Person ..."
+      <InputTextField
+        label="Alternate Contact Person"
+        type="text"
+        placeholder="Enter Your ALternate Contact Person ..."
+        {...register("eContPerson")}
       />
-      <InputFieldText
-        labelText="Alternate Contact No."
-        inputType="text"
-        placeHolderText="Enter Your ALternate Contact No ..."
+      <InputTextField
+        label="Alternate Contact No."
+        type="text"
+        placeholder="Enter Your ALternate Contact No ..."
+        {...register("eContNo")}
       />
-      <InputFieldText
-        labelText="Relation"
-        inputType="select"
-        placeHolderText="Enter Your Relation. ..."
+      <InputTextField
+        label="Relation"
+        placeholder="select"
+        {...register("relationId")}
+        errorMessage={errors?.relationId?.message}
         required
-        arr={RELATION_DATA}
-      />
+        asChild
+      >
+        <select>
+          <option value="">--select relation--</option>
+          {RELATION_DATA.map((item) => (
+            <option key={item.id} value={item.id}>{item.name}</option>
+          ))}
+        </select>
+      </InputTextField>
       <CommonButton name="Next" handler={nextHandler} />
       <CommonButton
         name="Back"
