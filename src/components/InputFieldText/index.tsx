@@ -1,11 +1,13 @@
 import { ComponentProps, forwardRef, useId } from "react";
 import { Slot } from "@radix-ui/react-slot";
+import { ErrTextField } from "../errTextField";
 
 interface InputTextFieldProps extends Omit<ComponentProps<"input">, "ref"> {
   asChild?: boolean;
-  required?:boolean;
+  required?: boolean;
   label?: string;
   labelProps?: ComponentProps<"label">;
+  errorMessage?: string;
 }
 export const InputTextField = forwardRef(
   (
@@ -13,6 +15,7 @@ export const InputTextField = forwardRef(
       asChild,
       label,
       required,
+      errorMessage,
       labelProps: rawLabelProps = {},
       ...inputProps
     }: InputTextFieldProps,
@@ -30,7 +33,8 @@ export const InputTextField = forwardRef(
           className={"font-medium" + className}
           {...labelProps}
         >
-          {label} {required ? <span className="text-error">*</span> : "(optional)"}
+          {label}{" "}
+          {required ? <span className="text-error">*</span> : "(optional)"}
         </label>
         {/* <br /> */}
         <Comp
@@ -39,6 +43,7 @@ export const InputTextField = forwardRef(
           {...inputProps}
           ref={ref as never}
         />
+        {errorMessage ? <ErrTextField errorMessage="" /> : null}
       </div>
     );
   }
@@ -47,11 +52,11 @@ export const InputTextField = forwardRef(
 export const MainInput = () => {
   return (
     <div>
-      <InputTextField placeholder="Hello"/>
+      <InputTextField placeholder="Hello" />
       <InputTextField asChild>
         <textarea />
       </InputTextField>
-      <InputTextField  asChild>
+      <InputTextField asChild>
         <select className="bg-secondary">
           <option value="1">1</option>
           <option value="2">2</option>
