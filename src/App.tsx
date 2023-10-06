@@ -41,6 +41,9 @@ const App = () => {
               <button type="button" onClick={() => remove(index)}>
                 Delete
               </button>
+              <button type="button" onClick={() => remove(index)}>
+                Remove
+              </button>
             </div>
             </div>
           );
@@ -54,6 +57,7 @@ const App = () => {
         >
           append
         </button>
+        
       </section>
 
       <input type="submit" />
